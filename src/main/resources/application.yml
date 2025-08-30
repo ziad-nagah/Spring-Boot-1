@@ -1,0 +1,30 @@
+#Servre & Tomcat Configs
+server:
+  port: 9090
+#JWT configs
+token:
+  secret: dcyvrvbusidhAEVvw734683254@@@khv
+  time: 24h
+#Spring Boot Configs
+spring:
+#Spring Security Configs
+  security:
+    user:
+      name: ziad
+      password: ziad123
+  application:
+   name: spring-boot-demo
+#Oracle Database Configuration
+  datasource:
+    driver-class-name: oracle.jdbc.OracleDriver
+    url: jdbc:oracle:thin:@//localhost:1521/orclpdb
+    username: hr
+    password: hr
+#JPA and Hibernate Configuration for Oracle
+  jpa:
+   hibernate:
+     ddl-auto: update
+   show-sql: true
+  #Messages Configs
+  messages:
+    basename: i18n/messages

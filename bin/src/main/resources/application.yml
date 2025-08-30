@@ -1,0 +1,16 @@
+spring:
+  application:
+   name:spring-boot-demo
+  server:
+   port:9090
+#Oracle Database Configuration
+  datasource:
+    driver-class-name: oracle.jdbc.OracleDriver
+    url: jdbc:oracle:thin:@//localhost:1521/orclpdb
+    username: hr
+    password: hr
+#JPA and Hibernate Configuration for Oracle
+  jpa:
+  hibernate:
+    ddl-auto: update
+    show-sql: true
