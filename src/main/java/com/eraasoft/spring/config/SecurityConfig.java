@@ -39,8 +39,11 @@ public class SecurityConfig {
         http.authorizeHttpRequests(api -> api
 //                        .requestMatchers(/*HttpMethod.GET,*/ "/eraa-soft/**").permitAll()//.hasRole("ADMIN")///students
 ////                      .requestMatchers(HttpMethod.GET, "/**").permitAll()
+                        .requestMatchers("/swagger-ui/**").permitAll()
+                        .requestMatchers("/v3/**").permitAll()
                         .requestMatchers(/*HttpMethod.GET,*/ "/auth/**").permitAll().anyRequest().authenticated()
                 );
+
                http.addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class);
 //             http.httpBasic(Customizer.withDefaults());
                http.httpBasic(AbstractHttpConfigurer::disable);
