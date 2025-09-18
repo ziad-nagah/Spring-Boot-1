@@ -6,7 +6,6 @@ import io.swagger.v3.oas.annotations.info.Info;
 import io.swagger.v3.oas.annotations.info.License;
 import org.springframework.context.annotation.Configuration;
 
-public class SwaggerConfig {
 
 
     @OpenAPIDefinition(
@@ -26,7 +25,7 @@ public class SwaggerConfig {
             )
     )
     @Configuration
-    public class SwaggerConfiguration {
+    public class SwaggerConfig {
     }
 
-}
+
