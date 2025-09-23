@@ -6,6 +6,8 @@ import com.eraasoft.spring.service.DTO.EraaSoftSchoolDTO;
 import com.eraasoft.spring.repo.EraaSoftSchoolRepo;
 import com.eraasoft.spring.service.EraaSoftShoolService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import java.util.ArrayList;
@@ -23,6 +25,7 @@ private EraaSoftMapper eraaSoftMapper;
 public EraaSoftShoolServiceImpl(EraaSoftSchoolRepo eraaSoftSchoolRepo,EraaSoftMapper eraaSoftMapper/* , ModelMapper modelMapper*/){this.eraaSoftSchoolRepo=eraaSoftSchoolRepo;this.eraaSoftMapper=eraaSoftMapper;}//this.modelMapper=modelMapper;}
 
     @Override
+    @CacheEvict(value = "students", key = "'allStudents'")
     public EraaSoftSchoolDTO save(EraaSoftSchoolDTO eraaSoftSchoolDTO) {
     if(Objects.nonNull(eraaSoftSchoolDTO.getId())){
         throw new RuntimeException("ID must be null");
@@ -39,6 +42,7 @@ public EraaSoftShoolServiceImpl(EraaSoftSchoolRepo eraaSoftSchoolRepo,EraaSoftMa
     }
 
     @Override
+    @Cacheable(value = "students" , key = "#eraaSoftSchoolDTO.id")
     public EraaSoftSchoolDTO update(EraaSoftSchoolDTO eraaSoftSchoolDTO) {
         if(Objects.isNull(eraaSoftSchoolDTO.getId())){
             throw new RuntimeException("id must not be null");
@@ -66,6 +70,7 @@ public EraaSoftShoolServiceImpl(EraaSoftSchoolRepo eraaSoftSchoolRepo,EraaSoftMa
     }
 
     @Override
+    @Cacheable(value = "students" , key = "'allStudents'")
     public List<EraaSoftSchoolDTO> getAll() {
     List<EraaSoftSchool> eraaSoftSchools = eraaSoftSchoolRepo.findAll();
     if(CollectionUtils.isEmpty(eraaSoftSchools)){
@@ -79,6 +84,7 @@ public EraaSoftShoolServiceImpl(EraaSoftSchoolRepo eraaSoftSchoolRepo,EraaSoftMa
     }
 
     @Override
+    @Cacheable(value = "students" , key = "#id")
     public EraaSoftSchoolDTO getById(Long id) {
         Optional <EraaSoftSchool> eraaSoftSchoolOptional =  eraaSoftSchoolRepo.findById(id);
         if(eraaSoftSchoolOptional.isEmpty()){

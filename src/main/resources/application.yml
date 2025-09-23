@@ -1,13 +1,13 @@
-#Servre & Tomcat Configs
+#Servre & Tomcat Configration
 server:
   port: 9090
 #JWT configs
 token:
   secret: dcyvrvbusidhAEVvw734683254@@@khv
   time: 24h
-#Spring Boot Configs
+#Spring Boot Configration
 spring:
-#Spring Security Configs
+#Spring Security Configration
   security:
     user:
       name: ziad
@@ -25,6 +25,14 @@ spring:
    hibernate:
      ddl-auto: update
    show-sql: true
-  #Messages Configs
+#Redis Configuration
+#  data:
+#    redis:
+#      host: localhost
+#      port: 49153
+#      username: default
+#      password: your_redis_password
+
+#Messages Configuration
   messages:
     basename: i18n/messages
