@@ -9,7 +9,7 @@ public interface EraaSoftShoolService {
    EraaSoftSchoolDTO save(EraaSoftSchoolDTO EraaSoftSchoolDTO);
     EraaSoftSchoolDTO update(EraaSoftSchoolDTO EraaSoftSchoolDTO);
     boolean delete(Long id);
-    List<EraaSoftSchoolDTO> getAll();
+    List<EraaSoftSchoolDTO> getAll(int page, int size);
     EraaSoftSchoolDTO getById(Long id);
     EraaSoftSchoolDTO getByUserName(String userName);
 

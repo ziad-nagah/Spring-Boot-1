@@ -59,7 +59,7 @@ public class EraaSoftSchoolController {
     boolean deleteStudent(@RequestParam/*("newName") or @PathVariable*/ Long id){return eraaSoftShoolService.delete(id);}
     @GetMapping("/students")
     @PreAuthorize("hasRole('ADMIN')")
-    ResponseEntity<List<EraaSoftSchoolDTO>> getAllStudent(){return ResponseEntity.ok(eraaSoftShoolService.getAll());}
+    ResponseEntity<List<EraaSoftSchoolDTO>> getAllStudent(int size , int page){return ResponseEntity.ok(eraaSoftShoolService.getAll(size , page));}
     @GetMapping("/student/{id}")
     ResponseEntity<EraaSoftSchoolDTO> getStudentById(@PathVariable Long id){return ResponseEntity.ok(eraaSoftShoolService.getById(id));}
     @GetMapping("/student/user/name/{userName}")

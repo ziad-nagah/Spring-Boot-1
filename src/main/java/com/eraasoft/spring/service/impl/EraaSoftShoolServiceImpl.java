@@ -8,8 +8,13 @@ import com.eraasoft.spring.service.EraaSoftShoolService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
+
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -71,17 +76,29 @@ public EraaSoftShoolServiceImpl(EraaSoftSchoolRepo eraaSoftSchoolRepo,EraaSoftMa
 
     @Override
     @Cacheable(value = "students" , key = "'allStudents'")
-    public List<EraaSoftSchoolDTO> getAll() {
-    List<EraaSoftSchool> eraaSoftSchools = eraaSoftSchoolRepo.findAll();
-    if(CollectionUtils.isEmpty(eraaSoftSchools)){
-        return new ArrayList<>();
-    }
+    public List<EraaSoftSchoolDTO> getAll(int page, int size) {
+//        List<EraaSoftSchool> eraaSoftSchools = eraaSoftSchoolRepo.findAll();
+//        if(CollectionUtils.isEmpty(eraaSoftSchools)){
+//            return new ArrayList<>();
+//        }
+////        return eraaSoftSchools.stream().map(eraaSoftSchool ->
+////        modelMapper.map(eraaSoftSchool,EraaSoftSchoolDTO.class)).collect(Collectors.toList());
+////    }
 //        return eraaSoftSchools.stream().map(eraaSoftSchool ->
-//        modelMapper.map(eraaSoftSchool,EraaSoftSchoolDTO.class)).collect(Collectors.toList());
+//                eraaSoftMapper.toEraaSoftSchoolDTO(eraaSoftSchool)).collect(Collectors.toList());
 //    }
-        return eraaSoftSchools.stream().map(eraaSoftSchool ->
-                eraaSoftMapper.toEraaSoftSchoolDTO(eraaSoftSchool)).collect(Collectors.toList());
-    }
+        Pageable pageable = PageRequest.of(page, size);
+        Page<EraaSoftSchool> eraaSoftSchoolsPage = eraaSoftSchoolRepo.findAll(pageable);
+
+        if (eraaSoftSchoolsPage.isEmpty()) {
+            return new ArrayList<>();
+        }
+
+        return eraaSoftSchoolsPage.getContent().stream()
+                .map(eraaSoftSchool -> eraaSoftMapper.toEraaSoftSchoolDTO(eraaSoftSchool))
+                .collect(Collectors.toList());
+}
+
 
     @Override
     @Cacheable(value = "students" , key = "#id")

@@ -25,7 +25,7 @@ public class AccountController {
     }
 
     @GetMapping("/user")
-    ResponseEntity<AccountDTO> getStudentById(@RequestParam String userName){return ResponseEntity.ok(accountService.getByUserName(userName));}
+    ResponseEntity<AccountDTO> getStudentByUserName(@RequestParam String userName){return ResponseEntity.ok(accountService.getByUserName(userName));}
     @GetMapping("/get-token")
     ResponseEntity<String> getToken(String userName){return ResponseEntity.ok(tokenHandler.createToken(accountService.getByUserName(userName))) ;}
 }
