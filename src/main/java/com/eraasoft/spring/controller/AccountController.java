@@ -23,7 +23,7 @@ public class AccountController {
         this.accountService = accountService;
         this.tokenHandler = tokenHandler;
     }
-
+//**
     @GetMapping("/user")
     ResponseEntity<AccountDTO> getStudentByUserName(@RequestParam String userName){return ResponseEntity.ok(accountService.getByUserName(userName));}
     @GetMapping("/get-token")
